@@ -88,7 +88,7 @@ the values themselves.
 String capabilities can be executed using `format` or `run`. If RunMethods corresponding to
 string capabilities are invoked, the format strings are returned. If arguments are provided,
 the strings are interpreted in the context of supplied arguments. The return value is Bytes
-in both cases.
+in both cases. This value is suitable as an argument for `IO#write`.
 
 ## Notes
 
