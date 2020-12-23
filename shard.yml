@@ -1,0 +1,15 @@
+name: unibilium-shim
+version: 0.1.0
+
+authors:
+  - Davor Ocelic <docelic@crystallabs.io>
+
+crystal: 0.35.1
+
+license: MIT
+
+dependencies:
+  unibilium:
+    #github: crystallabs/unibilium.cr
+    path: ../unibilium.cr
+    branch: master
