@@ -8,6 +8,8 @@ module Unibilium
     class Shim
       VERSION = "0.1.0"
 
+      include RunMethods
+
       @terminfo : Unibilium::Terminfo
 
       def initialize(@terminfo)

@@ -42,9 +42,13 @@ From there, there are 3 options:
 class My
   include Unibilium::Terminfo::Shim::AliasMethods
 
-  auto_left_margin # => ::Unibilium::Entry::Boolean::Auto_left_margin
-  bw               # => ::Unibilium::Entry::Boolean::Auto_left_margin
-  ...
+  def initialize
+    @terminfo = Unibilium::Terminfo.from_env # Or any other way
+
+    auto_left_margin # => ::Unibilium::Entry::Boolean::Auto_left_margin
+    bw               # => ::Unibilium::Entry::Boolean::Auto_left_margin
+    ...
+  end
 end
 ```
 
@@ -52,35 +56,53 @@ end
 
 ```
 class My
-  include Unibilium::Terminfo::Shim::RunMethods
-
   def initialize
     @terminfo = Unibilium::Terminfo.from_env # Or any other way
-    @shim = Unibilium::Terminfo::Shim.new terminfo
+    @shim = Unibilium::Terminfo::Shim.new @terminfo
 
-    auto_left_margin  # => true or Exception
-    auto_left_margin? # => true or nil
+    @shim.auto_left_margin  # => true or Exception
+    @shim.auto_left_margin? # => true or nil
 
-    lines   # => Int >= 0 or Exception
-    lines?  # => Int >= 0 or nil
+    @shim.lines   # => Int >= 0 or Exception
+    @shim.lines?  # => Int >= 0 or nil
 
-    cursor_pos  # => Bytes or Exception
-    cursor_pos? # => Bytes or nil
+    @shim.cursor_pos  # => Bytes or Exception
+    @shim.cursor_pos? # => Bytes or nil
 
-    cursor_pos(10, 20)  # => Bytes or Exception
-    cursor_pos?(10, 20) # => Bytes or nil
+    @shim.cursor_pos(10, 20)  # => Bytes or Exception
+    @shim.cursor_pos?(10, 20) # => Bytes or nil
 
     ...
   end
 end
 ```
 
+Or the methods can be included in the current class; only `@terminfo` must exist:
+
+```
+class My
+  include Unibilium::Terminfo::Shim::RunMethods
+
+  def initialize
+    @terminfo = Unibilium::Terminfo.from_env # Or any other way
+
+    auto_left_margin  # => true or Exception
+    auto_left_margin? # => true or nil
+
+    ...
+  end
+end
+```
+
+Alias methods and run methods have the same names, thus they can't both be included in a class
+at the same time.
+
 ## Return Values
 
-The return values are interpreted to differentiate between existing and absent capabilities.
+The return values are interpreted by the shim to differentiate between existing and absent capabilities.
 
 Boolean values returning `false`, numeric values returning `<0`, and string values returning `null`
-are treated as absent and are returned as nil. In other cases, the truthy value is returned.
+are treated as absent and are returned as nil. In other cases, the corresponding / truthy values are returned.
 
 Boolean and numeric capabilities can't be executed so the return value from their RunMethods are
 the values themselves.
