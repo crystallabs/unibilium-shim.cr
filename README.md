@@ -24,6 +24,9 @@ Usage in a nutshell:
 
 ```crystal
 require "unibilium-shim"
+
+@terminfo = Unibilium::Terminfo.from_env # Or any other method
+@shim =  Unibilium::Terminfo::Shim.new @terminfo
 ```
 
 From there, there are 3 options:
