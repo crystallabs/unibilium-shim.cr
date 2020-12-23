@@ -97,6 +97,24 @@ end
 Alias methods and run methods have the same names, thus they can't both be included in a class
 at the same time.
 
+### Practical Example
+
+```
+require "unibilium-shim"
+
+class X
+  include ::Unibilium::Terminfo::Shim::RunMethods
+
+  def initialize
+    @terminfo = ::Unibilium::Terminfo.from_env
+  end
+end
+
+x=X.new
+STDOUT.write x.cursor_address(10,20)
+STDOUT.print "This text is printed at position 10,20"
+```
+
 ## Return Values
 
 The return values are interpreted by the shim to differentiate between existing and absent capabilities.
