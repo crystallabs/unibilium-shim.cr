@@ -10,7 +10,7 @@ module Unibilium
 
       include RunMethods
 
-      @terminfo : Unibilium::Terminfo
+      getter terminfo : Unibilium::Terminfo
 
       def initialize(@terminfo)
       end

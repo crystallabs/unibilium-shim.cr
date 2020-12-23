@@ -22,14 +22,14 @@ module X
           # https://github.com/crystal-lang/crystal/blob/3c48f311f98e95964d425abe23d2b353b7da07d1/src/io.cr#L1120
 
           if group == "boolean"
-            puts %{        def #{name}; @terminfo.get ::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize} || raise "Boolean capability #{name} (#{entry[1]}) is unsupported in the current terminal" end}
-            puts %{        def #{name}?; @terminfo.get? ::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize} || nil end}
+            puts %{        def #{name}; @terminfo.get(::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize}) || raise "Boolean capability #{name} (#{entry[1]}) is unsupported in the current terminal" end}
+            puts %{        def #{name}?; @terminfo.get?(::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize}) || nil end}
           elsif group == "numeric"
-            puts %{        def #{name}; v = @terminfo.get ::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize}; v >= 0 ? v :  raise "Numeric capability #{name} (#{entry[1]}) is unsupported in the current terminal" end}
-            puts %{        def #{name}?; v = @terminfo.get? ::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize}; v >= 0 ? v : nil end}
+            puts %{        def #{name}; v = @terminfo.get(::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize}); v >= 0 ? v :  raise "Numeric capability #{name} (#{entry[1]}) is unsupported in the current terminal" end}
+            puts %{        def #{name}?; v = @terminfo.get?(::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize}); v >= 0 ? v : nil end}
           else
-            puts %{        def #{name}(*args); v = @terminfo.get ::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize}; v.null? ? (raise "String capability #{name} (#{entry[1]}) is unsupported in the current terminal") : (args.any? ? @terminfo.run(v, *args) : Bytes.new v, ::LibC.strlen(v)) end}
-            puts %{        def #{name}?(*args); v = @terminfo.get? ::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize}; v.null? ? nil : (args.any? ? @terminfo.run(v, *args) : Bytes.new v, ::LibC.strlen(v)) end}
+            puts %{        def #{name}(*args); v = @terminfo.get(::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize}); (!v || v.null?) ? (raise "String capability #{name} (#{entry[1]}) is unsupported in the current terminal") : (args.any? ? @terminfo.run(v, *args) : Bytes.new v, ::LibC.strlen(v)) end}
+            puts %{        def #{name}?(*args); v = @terminfo.get?(::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize}); (!v || v.null?) ? nil : (args.any? ? @terminfo.run(v, *args) : Bytes.new v, ::LibC.strlen(v)) end}
           end
           #puts %{        :"#{name}" => ::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize},}
         end
