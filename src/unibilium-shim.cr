@@ -12,7 +12,7 @@ module Unibilium
 
       getter terminfo : Unibilium::Terminfo
 
-      def initialize(@terminfo)
+      def initialize(@terminfo : Unibilium::Terminfo)
       end
 
       #def get_bool?(c : String)
