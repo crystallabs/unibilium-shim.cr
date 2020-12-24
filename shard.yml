@@ -10,6 +10,5 @@ license: MIT
 
 dependencies:
   unibilium:
-    #github: crystallabs/unibilium.cr
-    path: ../unibilium.cr
-    branch: master
+    github: crystallabs/unibilium.cr
+    version: 0.10.0
