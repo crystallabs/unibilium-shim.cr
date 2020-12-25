@@ -15,7 +15,8 @@ module X
           else
             raise "Already exists: #{name}"
           end
-        elsif ! name.starts_with? /[^a-z]|as/
+        elsif ! name.starts_with? /[^a-zA-Z]|as/
+          name = "_#{name}" if name.starts_with? /[A-Z]/
           add name
           puts %{        def #{name}; ::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize} end}
           #puts %{        :"#{name}" => ::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize},}
