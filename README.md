@@ -15,7 +15,7 @@ Add this to your application's `shard.yml`:
 dependencies:
   unibilium-shim:
     github: crystallabs/unibilium-shim.cr
-    branch: master
+    version: 0.1.0
 ```
 
 ## Usage
