@@ -179,7 +179,7 @@ module Support
           [ "KeyStab",                     "key_stab"                  , "khts",  "kT"], #  set-tab key
           [ "KeyUp",                       "key_up"                    , "kcuu1", "ku"], #  up-arrow key
           [ "KeypadLocal",                 "keypad_local"              , "rmkx",  "ke"], #  leave "key‐ board_transmit" mode
-          [ "KeypadXmit",                  "keypad_xmit"               , "smkx",  "ks"], #  enter "key‐ board_transmit" mode
+          [ "KeypadXmit",                  "keypad_xmit"               , "smkx",  "ks", "enter_keyboard_transmit_mode"], #  enter "key‐ board_transmit" mode
           [ "LabF0",                       "lab_f0"                    , "lf0",   "l0"], #  label on function key f0 if not f0
           [ "LabF1",                       "lab_f1"                    , "lf1",   "l1"], #  label on function key f1 if not f1
           [ "LabF10",                      "lab_f10"                   , "lf10",  "la"], #  label on function key f10 if not f10
@@ -245,7 +245,7 @@ module Support
           [ "ExitAmMode",                  "exit_am_mode"              , "rmam",  "RA"], #  turn off automatic margins
           [ "XonCharacter",                "xon_character"             , "xonc",  "XN"], #  XON character
           [ "XoffCharacter",               "xoff_character"            , "xoffc", "XF"], #  XOFF character
-          [ "EnaAcs",                      "ena_acs"                   , "enacs", "eA"], #  enable alternate char set
+          [ "EnaAcs",                      "ena_acs"                   , "enacs", "eA", "enable_acs"], #  enable alternate char set
           [ "LabelOn",                     "label_on"                  , "smln",  "LO"], #  turn on soft labels
           [ "LabelOff",                    "label_off"                 , "rmln",  "LF"], #  turn off soft labels
           [ "KeyBeg",                      "key_beg"                   , "kbeg",  "@1"], #  begin key
