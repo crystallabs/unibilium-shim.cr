@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.com/crystallabs/unibilium-shim.cr.svg?branch=master)](https://travis-ci.com/crystallabs/unibilium-shim.cr)
+[![Version](https://img.shields.io/github/tag/crystallabs/unibilium-shim.cr.svg?maxAge=360)](https://github.com/crystallabs/unibilium-shim.cr/releases/latest)
+[![License](https://img.shields.io/github/license/crystallabs/unibilium-shim.cr.svg)](https://github.com/crystallabs/unibilium-shim.cr/blob/master/LICENSE)
+
 # Unibilium-shim.cr
 
 Convenience library for [unibilium.cr](https://github.com/crystallabs/unibilium.cr), a unibilium bindings library.
@@ -15,7 +19,7 @@ Add this to your application's `shard.yml`:
 dependencies:
   unibilium-shim:
     github: crystallabs/unibilium-shim.cr
-    version: 0.1.0
+    version: ~> 1.0
 ```
 
 ## Usage
