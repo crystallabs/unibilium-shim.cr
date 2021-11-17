@@ -3,13 +3,15 @@ require "./spec_helper"
 class Unibilium::XwR
   include ::Unibilium::Terminfo::Shim::RunMethods
   getter terminfo
+
   def initialize
-    @terminfo= ::Unibilium::Terminfo.dummy
+    @terminfo = ::Unibilium::Terminfo.dummy
   end
 end
 
 class Unibilium::XwA
   include ::Unibilium::Terminfo::Shim::AliasMethods
+
   def initialize
     @terminfo = ::Unibilium::Terminfo.from_env
   end

@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/crystallabs/unibilium-shim.cr.svg?branch=master)](https://travis-ci.com/crystallabs/unibilium-shim.cr)
+[![Linux CI](https://github.com/crystallabs/unibilium-shim.cr/workflows/Linux%20CI/badge.svg)](https://github.com/crystallabs/unibilium-shim.cr/actions?query=workflow%3A%22Linux+CI%22+event%3Apush+branch%3Amaster)
 [![Version](https://img.shields.io/github/tag/crystallabs/unibilium-shim.cr.svg?maxAge=360)](https://github.com/crystallabs/unibilium-shim.cr/releases/latest)
 [![License](https://img.shields.io/github/license/crystallabs/unibilium-shim.cr.svg)](https://github.com/crystallabs/unibilium-shim.cr/blob/master/LICENSE)
 
@@ -6,10 +6,10 @@
 
 Convenience library for [unibilium.cr](https://github.com/crystallabs/unibilium.cr), a unibilium bindings library.
 
-Unibilium-shim supports:
+In addition to functionality in the `unibilium.cr` shard, `unibilium-shim` supports:
 
 1. Accessing and running standard capabilities using long string names, short string names, and methods
-2. Interpreting return values (testing for `false`, `<0`, and `nil` values to indicate missing/disabled capabilities)
+2. Interpreting return values (testing for `false`, `<0`, and `nil`) to indicate missing/disabled capabilities
 
 ## Installation
 
@@ -30,9 +30,10 @@ Usage in a nutshell:
 require "unibilium-shim"
 ```
 
-From there, there are 3 options:
+From there, there are multiple ways how the shard's functionality can be used:
 
-1. Aliased names can be looked up in `Unibilium::Terminfo::Shim::Aliases` Hash:
+1. Terminfo capabilities and their aliased names can be looked up via strings in the `Unibilium::Terminfo::Shim::Aliases` Hash.
+This just maps strings to the appropriate enum members for invoking `unibilium.cr` methods:
 
 ```
   "auto_left_margin" => ::Unibilium::Entry::Boolean::Auto_left_margin,
@@ -40,7 +41,8 @@ From there, there are 3 options:
   ...
 ```
 
-2. Aliased names can be retrieved via methods (preferred over using a Hash lookup):
+2. Terminfo capabilities and their aliased names can be looked up via methods (preferred over using a Hash lookup).
+Again this just invokes the methods and the methods return the appropriate enum members:
 
 ```
 class My
@@ -56,7 +58,9 @@ class My
 end
 ```
 
-3. Values can be retrieved, and strings interpreted, via methods:
+3. Terminfo capabilities and their aliased names can be run via methods. This does not return the enum members
+but actual values. Additionally if string capabilities support parameters, providing the parameters runs the
+string capabilities and returns the final/interpreted value.
 
 ```
 class My
@@ -81,7 +85,8 @@ class My
 end
 ```
 
-Or the methods can be included in the current class; only `@terminfo` must exist:
+4. Or the methods for accessing Terminfo capabilities and their aliased names can be included in
+the current class; only `@terminfo` must exist:
 
 ```
 class My
@@ -93,13 +98,16 @@ class My
     auto_left_margin  # => true or Exception
     auto_left_margin? # => true or nil
 
+    cursor_pos(10, 20)  # => Bytes or Exception
+    cursor_pos?(10, 20) # => Bytes or nil
+
     ...
   end
 end
 ```
 
-Alias methods and run methods have the same names, thus they can't both be included in a class
-at the same time.
+NOTE When using approaches (2) or (4), note that the alias and run methods have the same names, thus
+they can't both be included in a class at the same time as the methods will overwrite each other.
 
 ### Practical Example
 
@@ -123,10 +131,10 @@ STDOUT.print "This text is printed at position 10,20"
 
 The return values are interpreted by the shim to differentiate between existing and absent capabilities.
 
-Boolean values returning `false`, numeric values returning `<0`, and string values returning `null`
+Boolean values returning `false`, numeric values returning `less than 0`, and string values returning `null`
 are treated as absent and are returned as nil. In other cases, the corresponding / truthy values are returned.
 
-Boolean and numeric capabilities can't be executed so the return value from their RunMethods are
+Boolean and numeric capabilities can't be executed so the return values from their RunMethods are
 the values themselves.
 
 String capabilities can be executed using `format` or `run`. If RunMethods corresponding to
@@ -136,7 +144,8 @@ in both cases. This value is suitable as an argument for `IO#write`.
 
 ## Notes
 
-Extended capabilities are currently not supported.
+Extended capabilities are currently not addressed by this shard. E.g. extended capability "AX" does not
+appear anywhere in aliased or run methods produced by this shard.
 
 ## Testing
 
