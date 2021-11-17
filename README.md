@@ -31,7 +31,7 @@ Usage in a nutshell:
 require "unibilium-shim"
 ```
 
-From there, there are multiple ways how the shard's functionality can be used:
+From there, there are multiple ways how the shard's functionality can be used (from lowest-level to highest-level functionality):
 
 1. Terminfo capabilities and their aliased names can be looked up via strings in the `Unibilium::Terminfo::Shim::Aliases` Hash.
 This just maps strings to the appropriate enum members for invoking `unibilium.cr` methods:
@@ -42,7 +42,7 @@ This just maps strings to the appropriate enum members for invoking `unibilium.c
   ...
 ```
 
-2. Terminfo capabilities and their aliased names can be looked up via methods (preferred over using a Hash lookup).
+2. Terminfo capabilities and their aliased names can be looked up via methods.
 Again this just invokes the methods and the methods return the appropriate enum members:
 
 ```
@@ -126,6 +126,12 @@ end
 x=X.new
 STDOUT.write x.cursor_address(10,20)
 STDOUT.print "This text is printed at position 10,20"
+```
+
+The final level of convenience are probably the `.method?(...)` methods.
+
+```
+x.cursor_address?(10,20).try { |v| STDOUT.write v }
 ```
 
 ## Return Values
