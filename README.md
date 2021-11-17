@@ -9,6 +9,7 @@ Convenience library for [unibilium.cr](https://github.com/crystallabs/unibilium.
 In addition to functionality in the `unibilium.cr` shard, `unibilium-shim` supports:
 
 1. Accessing and running standard capabilities using long string names, short string names, and methods
+1. Accessing and running standard capabilities using long string names, short string names, and methods
 2. Interpreting return values (testing for `false`, `<0`, and `nil`) to indicate missing/disabled capabilities
 
 ## Installation
@@ -132,7 +133,8 @@ STDOUT.print "This text is printed at position 10,20"
 The return values are interpreted by the shim to differentiate between existing and absent capabilities.
 
 Boolean values returning `false`, numeric values returning `less than 0`, and string values returning `null`
-are treated as absent and are returned as nil. In other cases, the corresponding / truthy values are returned.
+are treated as absent and either result in returning nil (when they're accessed with `[]?`) or in raising
+an exception. In other cases, the corresponding (and truthy) values are returned.
 
 Boolean and numeric capabilities can't be executed so the return values from their RunMethods are
 the values themselves.
