@@ -33,6 +33,8 @@ module X
           else
             puts %{        def #{name}(*args); v = @terminfo.get(::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize}); (!v || v.null?) ? (raise "String capability #{name} (#{entry[1]}) is unsupported in the current terminal") : (args.any? ? @terminfo.run(v, *args) : Bytes.new v, ::LibC.strlen(v)) end}
             puts %{        def #{name}?(*args); v = @terminfo.get?(::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize}); (!v || v.null?) ? nil : (args.any? ? @terminfo.run(v, *args) : Bytes.new v, ::LibC.strlen(v)) end}
+            puts %{        def #{name}(io : IO, *args); v = @terminfo.get(::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize}); (!v || v.null?) ? (raise "String capability #{name} (#{entry[1]}) is unsupported in the current terminal") : io.write (args.any? ? @terminfo.run(v, *args) : Bytes.new v, ::LibC.strlen(v)) end}
+            puts %{        def #{name}?(io : IO, *args); v = @terminfo.get?(::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize}); (!v || v.null?) ? nil : io.write (args.any? ? @terminfo.run(v, *args) : Bytes.new v, ::LibC.strlen(v)) end}
           end
           # puts %{        :"#{name}" => ::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize},}
         end
