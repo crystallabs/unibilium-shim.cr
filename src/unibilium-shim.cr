@@ -6,7 +6,7 @@ require "./run_methods"
 module Unibilium
   class Terminfo
     class Shim
-      VERSION = "1.0.1"
+      VERSION = "1.1.0"
 
       include RunMethods
 
