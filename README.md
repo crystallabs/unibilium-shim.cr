@@ -158,11 +158,15 @@ STDOUT.write x.cursor_address(10,20)
 STDOUT.print "This text is printed at position 10,20"
 ```
 
-The final level of convenience are probably the `.method?(...)` methods.
+The final level of convenience are probably the `.method?(...)` methods with passing
+the IO as first arg:
 
 ```
-x.cursor_address(STDOUT, 10,20)
+x.cursor_address?(STDOUT, 10,20)
 ```
+
+This returns `nil` if `cursor_address` capability is not supported. Or if it is, then it runs
+the format string with parameters (10,20) and writes the result to given IO (STDOUT).
 
 ## Return Values
 
@@ -181,7 +185,7 @@ the strings are interpreted in the context of supplied arguments. The return val
 in both cases. This value is suitable as an argument for `IO#write`.
 
 If an IO is passed as the first argument into string capability methods, the resulting strings are
-automatically written to the IO.
+automatically written to the IO. Return value is the return value of `IO#write`.
 
 ## Auto-generation of code
 
