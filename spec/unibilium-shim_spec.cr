@@ -5,7 +5,7 @@ class Unibilium::XwR
   getter terminfo
 
   def initialize
-    @terminfo = ::Unibilium::Terminfo.dummy
+    @terminfo = ::Unibilium.dummy
   end
 end
 
@@ -13,7 +13,7 @@ class Unibilium::XwA
   include ::Unibilium::Terminfo::Shim::AliasMethods
 
   def initialize
-    @terminfo = ::Unibilium::Terminfo.from_env
+    @terminfo = ::Unibilium.from_env
   end
 end
 

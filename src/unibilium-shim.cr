@@ -3,16 +3,16 @@ require "unibilium"
 require "./alias_methods"
 require "./run_methods"
 
-module Unibilium
+class Unibilium
   class Terminfo
     class Shim
       VERSION = "1.1.0"
 
       include RunMethods
 
-      getter terminfo : Unibilium::Terminfo
+      getter terminfo : ::Unibilium
 
-      def initialize(@terminfo : Unibilium::Terminfo)
+      def initialize(@terminfo : ::Unibilium)
       end
 
       # def get_bool?(c : String)

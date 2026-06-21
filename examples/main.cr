@@ -6,7 +6,7 @@ class X
   include ::Unibilium::Terminfo::Shim::RunMethods
 
   def initialize
-    @terminfo = ::Unibilium::Terminfo.from_env
+    @terminfo = ::Unibilium.from_env
     @shim = ::Unibilium::Terminfo::Shim.new @terminfo
   end
 end

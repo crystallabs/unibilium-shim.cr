@@ -11,4 +11,4 @@ license: AGPLv3
 dependencies:
   unibilium:
     github: crystallabs/unibilium.cr
-    version: ~> 1.0
+    branch: master

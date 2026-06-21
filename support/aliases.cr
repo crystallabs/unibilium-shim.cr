@@ -27,7 +27,7 @@ module X
     end
   end
 
-  puts "module Unibilium\n  class Terminfo\n    class Shim\n      Aliases = {"
+  puts "class Unibilium\n  class Terminfo\n    class Shim\n      Aliases = {"
 
   @@seen = [] of String
   create_all_from Support.bool, :boolean

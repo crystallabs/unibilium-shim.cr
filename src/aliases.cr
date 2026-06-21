@@ -1,4 +1,4 @@
-module Unibilium
+class Unibilium
   class Terminfo
     class Shim
       Aliases = {
