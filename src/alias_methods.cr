@@ -1918,6 +1918,10 @@ class Unibilium
           ::Unibilium::Entry::String::Keypad_xmit
         end
 
+        def enter_keyboard_transmit_mode
+          ::Unibilium::Entry::String::Keypad_xmit
+        end
+
         def lab_f0
           ::Unibilium::Entry::String::Lab_f0
         end
@@ -2687,6 +2691,10 @@ class Unibilium
         end
 
         def eA
+          ::Unibilium::Entry::String::Ena_acs
+        end
+
+        def enable_acs
           ::Unibilium::Entry::String::Ena_acs
         end
 

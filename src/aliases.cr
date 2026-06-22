@@ -652,9 +652,10 @@ class Unibilium
         "rmkx"         => ::Unibilium::Entry::String::Keypad_local,
         "ke"           => ::Unibilium::Entry::String::Keypad_local,
 
-        "keypad_xmit" => ::Unibilium::Entry::String::Keypad_xmit,
-        "smkx"        => ::Unibilium::Entry::String::Keypad_xmit,
-        "ks"          => ::Unibilium::Entry::String::Keypad_xmit,
+        "keypad_xmit"                  => ::Unibilium::Entry::String::Keypad_xmit,
+        "smkx"                         => ::Unibilium::Entry::String::Keypad_xmit,
+        "ks"                           => ::Unibilium::Entry::String::Keypad_xmit,
+        "enter_keyboard_transmit_mode" => ::Unibilium::Entry::String::Keypad_xmit,
 
         "lab_f0" => ::Unibilium::Entry::String::Lab_f0,
         "lf0"    => ::Unibilium::Entry::String::Lab_f0,
@@ -911,9 +912,10 @@ class Unibilium
         "xoffc"          => ::Unibilium::Entry::String::Xoff_character,
         "XF"             => ::Unibilium::Entry::String::Xoff_character,
 
-        "ena_acs" => ::Unibilium::Entry::String::Ena_acs,
-        "enacs"   => ::Unibilium::Entry::String::Ena_acs,
-        "eA"      => ::Unibilium::Entry::String::Ena_acs,
+        "ena_acs"    => ::Unibilium::Entry::String::Ena_acs,
+        "enacs"      => ::Unibilium::Entry::String::Ena_acs,
+        "eA"         => ::Unibilium::Entry::String::Ena_acs,
+        "enable_acs" => ::Unibilium::Entry::String::Ena_acs,
 
         "label_on" => ::Unibilium::Entry::String::Label_on,
         "smln"     => ::Unibilium::Entry::String::Label_on,
