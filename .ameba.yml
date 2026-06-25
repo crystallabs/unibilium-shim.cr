@@ -1,0 +1,25 @@
+# Ameba configuration for unibilium-shim
+# Run with: bin/ameba   (after `shards install`)
+#
+# src/aliases.cr, src/alias_methods.cr and src/run_methods.cr are GENERATED
+# by the scripts in support/ (see support/regen.sh). They expose every
+# terminfo capability under its canonical terminfo name (e.g. `kBEG`, `OTGL`,
+# `set_a_foreground`), so their method names are dictated by the terminfo
+# standard, not by our style. Linting the machine-generated output produces
+# ~500 unfixable Naming violations and is extremely slow (run_methods.cr alone
+# takes ~8 minutes), so we exclude the generated files and lint the
+# hand-written sources and the generators in support/ instead.
+Globs:
+  - "**/*.cr"
+  - "!lib"
+
+Excluded:
+  - src/aliases.cr
+  - src/alias_methods.cr
+  - src/run_methods.cr
+
+# The generator necessarily branches over the terminfo capability tables;
+# its complexity is inherent and not worth fragmenting into helpers.
+Metrics/CyclomaticComplexity:
+  Excluded:
+    - support/run_methods.cr
