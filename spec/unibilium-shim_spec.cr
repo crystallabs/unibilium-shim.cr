@@ -60,6 +60,12 @@ describe Unibilium::Terminfo::Shim do
     x.terminfo.run(x.cursor_address, 10, 20).should eq Bytes[27, 91, 49, 49, 59, 50, 49, 72]
   end
 
+  it "exposes the Aliases lookup table" do
+    Unibilium::Terminfo::Shim::Aliases["ceol_standout_glitch"].should eq Unibilium::Entry::Boolean::Ceol_standout_glitch
+    Unibilium::Terminfo::Shim::Aliases["xhp"].should eq Unibilium::Entry::Boolean::Ceol_standout_glitch
+    Unibilium::Terminfo::Shim::Aliases["xs"].should eq Unibilium::Entry::Boolean::Ceol_standout_glitch
+  end
+
   it "has working alias methods" do
     x = Unibilium::XwA.new
     x.ceol_standout_glitch.should eq Unibilium::Entry::Boolean::Ceol_standout_glitch

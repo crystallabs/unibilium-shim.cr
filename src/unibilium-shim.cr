@@ -1,5 +1,6 @@
 require "unibilium"
 
+require "./aliases"
 require "./alias_methods"
 require "./run_methods"
 
