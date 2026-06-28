@@ -60,6 +60,33 @@ describe Unibilium::Terminfo::Shim do
     x.terminfo.run(x.cursor_address, 10, 20).should eq Bytes[27, 91, 49, 49, 59, 50, 49, 72]
   end
 
+  it "accesses capabilities by string name via #[] and #[]?" do
+    t = ::Unibilium.dummy
+    shim = Unibilium::Terminfo::Shim.new t
+
+    # Unknown / absent capabilities
+    shim["nonexistent_capability"]?.should be_nil
+    shim["columns"]?.should be_nil
+    expect_raises Exception do
+      shim["columns"]
+    end
+
+    # Numeric, accessed by both long and short names
+    t.set(Unibilium::Entry::Numeric::Columns, 80)
+    shim["columns"]?.should eq 80
+    shim["co"].should eq 80
+
+    # Boolean
+    t.set(Unibilium::Entry::Boolean::Auto_left_margin, true)
+    shim["auto_left_margin"]?.should be_true
+    shim["bw"].should be_true
+
+    # String, returned as Bytes
+    t.set(Unibilium::Entry::String::Bell, "\a")
+    shim["bell"]?.should eq Bytes[7]
+    shim["bl"].should eq Bytes[7]
+  end
+
   it "exposes the Aliases lookup table" do
     Unibilium::Terminfo::Shim::Aliases["ceol_standout_glitch"].should eq Unibilium::Entry::Boolean::Ceol_standout_glitch
     Unibilium::Terminfo::Shim::Aliases["xhp"].should eq Unibilium::Entry::Boolean::Ceol_standout_glitch

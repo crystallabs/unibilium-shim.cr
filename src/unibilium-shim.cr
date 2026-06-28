@@ -16,39 +16,33 @@ class Unibilium
       def initialize(@terminfo : ::Unibilium)
       end
 
-      # def get_bool?(c : String)
-      #  Aliases[c]?.try do |enum_entry|
-      #    @terminfo.get?(enum_entry) || nil
-      #  end
-      # end
+      # Looks up the capability named *c* (either its long or short/aliased
+      # name) and returns its interpreted value, or `nil` if the capability is
+      # absent/disabled in the current terminal (or the name is unknown).
+      #
+      # Following the same interpretation as the run methods, booleans return
+      # `true`/`nil`, numerics a non-negative `Int32`/`nil`, and strings their
+      # `Bytes`/`nil`.
+      def []?(c : String)
+        Aliases[c]?.try do |entry|
+          case entry
+          in ::Unibilium::Entry::Boolean
+            @terminfo.get?(entry) ? true : nil
+          in ::Unibilium::Entry::Numeric
+            v = @terminfo.get?(entry)
+            v >= 0 ? v : nil
+          in ::Unibilium::Entry::String
+            v = @terminfo.get?(entry)
+            v ? Bytes.new(v, ::LibC.strlen(v)) : nil
+          end
+        end
+      end
 
-      # def get_num?(c : String)
-      #  Aliases[c]?.try do |enum_entry|
-      #    @terminfo.get?(enum_entry).try do |v|
-      #      v >= 0 ? v : nil
-      #    end
-      #  end
-      # end
-
-      # def get_str?(c : String)
-      #  Aliases[c]?.try do |enum_entry|
-      #    @terminfo.get?(enum_entry).try do |v|
-      #      v.null? ? nil : v
-      #    end
-      #  end
-      # end
-
-      # def get_bool(c : String)
-      #  @terminfo.get_bool?(c) || raise "Boolean capability #{c} is unsupported in the current terminal"
-      # end
-
-      # def get_num(c : String)
-      #  @terminfo.get_num?(c) || raise "Numeric capability #{c} is unsupported in the current terminal"
-      # end
-
-      # def get_str(c : String)
-      #  @terminfo.get_str?(c) || raise "String capability #{c} is unsupported in the current terminal"
-      # end
+      # Like `#[]?` but raises if the capability named *c* is unknown, absent,
+      # or disabled in the current terminal.
+      def [](c : String)
+        self[c]? || raise "Capability #{c} is unsupported in the current terminal"
+      end
     end
   end
 end
