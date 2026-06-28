@@ -7,6 +7,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      TERM: xterm
     steps:
       - name: Download source
         uses: actions/checkout@v4
@@ -19,7 +21,7 @@ jobs:
           key: ${{ runner.os }}-shards-${{ hashFiles('shard.yml') }}
           restore-keys: ${{ runner.os }}-shards-
       - name: Install packages
-        run: sudo apt-get update -y && sudo apt-get install -y libunibilium-dev libunibilium4
+        run: sudo apt-get update -y && sudo apt-get install -y libunibilium-dev libunibilium4 ncurses-term
       - name: Install shards
         run: shards update --ignore-crystal-version
       - name: Run tests
@@ -28,6 +30,8 @@ jobs:
         run: crystal tool format --check
   release_linux:
     runs-on: ubuntu-latest
+    env:
+      TERM: xterm
     container:
       image: crystallang/crystal:latest-alpine
     steps:
