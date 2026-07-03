@@ -285,7 +285,7 @@ class Unibilium
         "Yp"             => ::Unibilium::Entry::Numeric::Bit_image_type,
 
         "magic_cookie_glitch_ul" => ::Unibilium::Entry::Numeric::Magic_cookie_glitch_ul,
-        "UTug"                   => ::Unibilium::Entry::Numeric::Magic_cookie_glitch_ul,
+        "OTug"                   => ::Unibilium::Entry::Numeric::Magic_cookie_glitch_ul,
 
         "carriage_return_delay" => ::Unibilium::Entry::Numeric::Carriage_return_delay,
         "OTdC"                  => ::Unibilium::Entry::Numeric::Carriage_return_delay,
@@ -1864,6 +1864,7 @@ class Unibilium
         "OTnl"               => ::Unibilium::Entry::String::Linefeed_if_not_lf,
 
         "backspace_if_not_bs" => ::Unibilium::Entry::String::Backspace_if_not_bs,
+        "OTbc"                => ::Unibilium::Entry::String::Backspace_if_not_bs,
 
         "other_non_function_keys" => ::Unibilium::Entry::String::Other_non_function_keys,
         "OTko"                    => ::Unibilium::Entry::String::Other_non_function_keys,

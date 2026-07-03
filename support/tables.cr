@@ -80,7 +80,7 @@ module Support
     ["Buttons", "buttons", "btns", "BT"],                               #  number of buttons on mouse
     ["BitImageEntwining", "bit_image_entwining", "bitwin", "Yo"],       #  number of passes for each bit-image row
     ["BitImageType", "bit_image_type", "bitype", "Yp"],                 #  type of bit-image device
-    ["MagicCookieGlitchUl", "magic_cookie_glitch_ul", "UTug"],          #
+    ["MagicCookieGlitchUl", "magic_cookie_glitch_ul", "OTug"],          #
     ["CarriageReturnDelay", "carriage_return_delay", "OTdC"],           #
     ["NewLineDelay", "new_line_delay", "OTdN"],                         #
     ["BackspaceDelay", "backspace_delay", "OTdB"],                      #
@@ -486,7 +486,7 @@ module Support
     ["TermcapInit2", "termcap_init2", "OTi2"],                                         #
     ["TermcapReset", "termcap_reset", "OTrs"],                                         #
     ["LinefeedIfNotLf", "linefeed_if_not_lf", "OTnl"],                                 #
-    ["BackspaceIfNotBs", "backspace_if_not_bs"],                                       #   XXX Removed OTBs in favor of backspaces_with_bs
+    ["BackspaceIfNotBs", "backspace_if_not_bs", "OTbc"],                                #
     ["OtherNonFunctionKeys", "other_non_function_keys", "OTko"],                       #
     ["ArrowKeyMap", "arrow_key_map", "OTma"],                                          #
     ["AcsUlcorner", "acs_ulcorner", "OTG2"],                                           #

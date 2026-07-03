@@ -17,7 +17,7 @@ module X
           else
             raise "Already exists: #{name}"
           end
-        elsif !(name.starts_with? /[^a-z]|as/) && !(name =~ /[\W]/)
+        elsif !(name.starts_with? /[^a-zA-Z]|as/) && !(name =~ /\W/)
           name = "_#{name}" if name.starts_with?(/[A-Z]/)
           add name
 
@@ -31,10 +31,10 @@ module X
             puts %{        def #{name}; v = @terminfo.get(::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize}); v >= 0 ? v :  raise "Numeric capability #{name} (#{entry[1]}) is unsupported in the current terminal" end}
             puts %{        def #{name}?; v = @terminfo.get?(::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize}); v >= 0 ? v : nil end}
           else
-            puts %{        def #{name}(*args); v = @terminfo.get?(::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize}); (!v || v.null?) ? (raise "String capability #{name} (#{entry[1]}) is unsupported in the current terminal") : (!args.empty? ? @terminfo.run(v, *args) : Bytes.new v, ::LibC.strlen(v)) end}
-            puts %{        def #{name}?(*args); v = @terminfo.get?(::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize}); (!v || v.null?) ? nil : (!args.empty? ? @terminfo.run(v, *args) : Bytes.new v, ::LibC.strlen(v)) end}
-            puts %{        def #{name}(io : IO, *args); v = @terminfo.get?(::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize}); (!v || v.null?) ? (raise "String capability #{name} (#{entry[1]}) is unsupported in the current terminal") : (!args.empty? ? @terminfo.format(io, v, *args) : io.write(Bytes.new v, ::LibC.strlen(v))) end}
-            puts %{        def #{name}?(io : IO, *args); v = @terminfo.get?(::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize}); (!v || v.null?) ? nil : (!args.empty? ? @terminfo.format(io, v, *args) : io.write(Bytes.new v, ::LibC.strlen(v))) end}
+            puts %{        def #{name}(*args); v = @terminfo.get?(::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize}); (!v || v.null?) ? (raise "String capability #{name} (#{entry[1]}) is unsupported in the current terminal") : (!args.empty? ? @terminfo.run(v, *args) : Slice.new(v, ::LibC.strlen(v), read_only: true).dup) end}
+            puts %{        def #{name}?(*args); v = @terminfo.get?(::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize}); (!v || v.null?) ? nil : (!args.empty? ? @terminfo.run(v, *args) : Slice.new(v, ::LibC.strlen(v), read_only: true).dup) end}
+            puts %{        def #{name}(io : IO, *args); v = @terminfo.get?(::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize}); (!v || v.null?) ? (raise "String capability #{name} (#{entry[1]}) is unsupported in the current terminal") : (!args.empty? ? @terminfo.format(io, v, *args) : io.write(Slice.new(v, ::LibC.strlen(v), read_only: true).dup)) end}
+            puts %{        def #{name}?(io : IO, *args); v = @terminfo.get?(::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize}); (!v || v.null?) ? nil : (!args.empty? ? @terminfo.format(io, v, *args) : io.write(Slice.new(v, ::LibC.strlen(v), read_only: true).dup)) end}
           end
           # puts %{        :"#{name}" => ::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize},}
         end

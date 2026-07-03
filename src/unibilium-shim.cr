@@ -33,7 +33,7 @@ class Unibilium
             v >= 0 ? v : nil
           in ::Unibilium::Entry::String
             v = @terminfo.get?(entry)
-            v ? Bytes.new(v, ::LibC.strlen(v)) : nil
+            v ? Slice.new(v, ::LibC.strlen(v), read_only: true).dup : nil
           end
         end
       end

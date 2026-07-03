@@ -822,7 +822,7 @@ class Unibilium
           ::Unibilium::Entry::Numeric::Magic_cookie_glitch_ul
         end
 
-        def _UTug
+        def _OTug
           ::Unibilium::Entry::Numeric::Magic_cookie_glitch_ul
         end
 
@@ -1647,10 +1647,6 @@ class Unibilium
         end
 
         def kf10
-          ::Unibilium::Entry::String::Key_f10
-        end
-
-        def k
           ::Unibilium::Entry::String::Key_f10
         end
 
@@ -5291,6 +5287,10 @@ class Unibilium
         end
 
         def backspace_if_not_bs
+          ::Unibilium::Entry::String::Backspace_if_not_bs
+        end
+
+        def _OTbc
           ::Unibilium::Entry::String::Backspace_if_not_bs
         end
 
