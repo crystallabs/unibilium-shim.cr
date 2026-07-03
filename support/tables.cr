@@ -486,7 +486,7 @@ module Support
     ["TermcapInit2", "termcap_init2", "OTi2"],                                         #
     ["TermcapReset", "termcap_reset", "OTrs"],                                         #
     ["LinefeedIfNotLf", "linefeed_if_not_lf", "OTnl"],                                 #
-    ["BackspaceIfNotBs", "backspace_if_not_bs", "OTbc"],                                #
+    ["BackspaceIfNotBs", "backspace_if_not_bs", "OTbc"],                               #
     ["OtherNonFunctionKeys", "other_non_function_keys", "OTko"],                       #
     ["ArrowKeyMap", "arrow_key_map", "OTma"],                                          #
     ["AcsUlcorner", "acs_ulcorner", "OTG2"],                                           #
