@@ -19,7 +19,7 @@ module X
           end
         else
           add name
-          puts %{        "#{name}" => ::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize},}
+          puts %(        "#{name}" => ::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize},)
           # puts %{        :"#{name}" => ::Unibilium::Entry::#{group.capitalize}::#{entry[1].capitalize},}
         end
       end

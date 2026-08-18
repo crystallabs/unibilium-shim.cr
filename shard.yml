@@ -1,5 +1,5 @@
 name: unibilium-shim
-version: 2.0.0
+version: 2.0.1
 
 authors:
   - Davor Ocelic <docelic@crystallabs.io>
@@ -16,4 +16,4 @@ dependencies:
 development_dependencies:
   ameba:
     github: crystal-ameba/ameba
-    version: ~> 1.6
+    branch: master
